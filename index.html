@@ -1,0 +1,319 @@
+```html
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Quinzet - Sèries de Rapidesa de Càlcul Mental</title>
+    <!-- Tailwind CSS per a una interfície de disseny modern i adaptable -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons per a icones visuals netes -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght=300;400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Outfit', sans-serif;
+        }
+        /* Amagar les fletxes predeterminades dels camps numèrics */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Capçalera Principal estil Quinzet -->
+    <header class="bg-blue-600 text-white shadow-md">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <!-- Logotip circular característic de El Quinzet -->
+                <div class="w-16 h-16 bg-blue-800 rounded-full flex items-center justify-center border-4 border-amber-400 shadow-inner shrink-0 relative">
+                    <div class="absolute w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center font-extrabold text-blue-900 text-2xl">Q</div>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-black tracking-tight">El Quinzet</h1>
+                    <p class="text-xs text-blue-100 uppercase font-bold tracking-widest">Sèries de rapidesa de càlcul mental</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2 bg-blue-700/60 px-4 py-2 rounded-xl text-sm font-medium border border-blue-500/30">
+                <i data-lucide="graduation-cap" class="w-5 h-5 text-amber-300"></i>
+                <span>Educació Primària i Secundària</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-6 flex flex-col gap-6">
+        
+        <!-- PANTALLA DE CONFIGURACIÓ I SELECCIÓ DE NIVELL -->
+        <section id="config-screen" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Columna esquerra: Explicació del Mètode -->
+            <div class="lg:col-span-1 bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-2.5 bg-blue-50 text-blue-600 rounded-xl">
+                            <i data-lucide="info" class="w-6 h-6"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-slate-800">El Mètode Quinzet</h2>
+                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        Aquest sistema té com a objectiu principal l'automatització de les operacions aritmètiques elementals mitjançant la pràctica diària.
+                    </p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex gap-3 text-xs bg-emerald-50 text-emerald-800 p-3 rounded-xl border border-emerald-100">
+                            <i data-lucide="check-circle" class="w-5 h-5 shrink-0 text-emerald-600"></i>
+                            <div>
+                                <span class="font-bold">Objectiu ideal:</span> Respondre unes 50 o més operacions correctes en 2 minuts.
+                            </div>
+                        </div>
+                        <div class="flex gap-3 text-xs bg-amber-50 text-amber-800 p-3 rounded-xl border border-amber-100">
+                            <i data-lucide="trending-up" class="w-5 h-5 shrink-0 text-amber-600"></i>
+                            <div>
+                                <span class="font-bold">Regla d'or:</span> Si fas menys de 15, baixa de nivell. Si fas 50 o més, puja de nivell!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-100 p-4 rounded-xl border border-slate-200">
+                    <h3 class="font-bold text-xs text-slate-500 uppercase tracking-wider mb-2">Instruccions de la prova</h3>
+                    <ul class="text-xs text-slate-600 space-y-1.5 list-disc list-inside">
+                        <li>Tens exactament 2 minuts (120 segons).</li>
+                        <li>S'ha de respondre en ordre de dalt a baix per columnes.</li>
+                        <li>Pots saltar-te operacions si no les saps.</li>
+                        <li>Supera el teu propi rècord de forma diària!</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Columna dreta: Selecció de Curs, Operació i Inici (Ocupa 2 columnes) -->
+            <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2.5 bg-amber-50 text-amber-600 rounded-xl">
+                            <i data-lucide="sliders" class="w-6 h-6"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-slate-800">Paràmetres de la Sèrie</h2>
+                    </div>
+
+                    <!-- Selecció de Nivell / Curs -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-bold text-slate-700 mb-2">1. Selecciona el Nivell de Curs:</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2" id="course-selector">
+                            <!-- Es genera dinàmicament amb JS -->
+                        </div>
+                    </div>
+
+                    <!-- Selecció d'Operació -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-bold text-slate-700 mb-2">2. Tria l'Operació:</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" id="operation-selector">
+                            <!-- Es genera dinàmicament amb JS -->
+                        </div>
+                    </div>
+
+                    <!-- Detalls del Nivell Seleccionat -->
+                    <div class="bg-blue-50/50 border border-blue-100 p-4 rounded-xl mb-6">
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="target" class="w-5 h-5 text-blue-600 mt-0.5"></i>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm" id="selected-level-title">Carregant nivell...</h4>
+                                <p class="text-xs text-slate-600 mt-1" id="selected-level-desc">Descripció del nivell de dificultat actual.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botó d'Inici de test -->
+                <div class="flex justify-end border-t border-slate-100 pt-6">
+                    <button onclick="startTest()" class="w-full sm:w-1/2 bg-blue-600 hover:bg-blue-700 active:transform active:scale-[0.98] transition-all text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2 text-base ml-auto">
+                        <i data-lucide="play" class="w-5 h-5"></i>
+                        Començar Prova (2 min)
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- PANTALLA DE LA PROVA INTERACTIVA -->
+        <section id="test-screen" class="hidden flex-col gap-6">
+            
+            <!-- Barra superior d'estat (Temporitzador, Progrés) -->
+            <div class="bg-slate-900 text-white p-4 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-4 shadow-md">
+                <div class="flex items-center gap-3">
+                    <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                    <div>
+                        <div class="text-xs text-slate-400 font-bold uppercase tracking-wider">Estat de la Prova</div>
+                        <div class="font-semibold text-sm text-slate-200">En execució</div>
+                    </div>
+                    <div class="h-6 w-px bg-slate-700 mx-2"></div>
+                    <div>
+                        <div class="text-xs text-slate-400 font-bold uppercase tracking-wider">Sèrie actual</div>
+                        <div class="font-semibold text-sm text-amber-400" id="current-series-display">Nivell - Operació</div>
+                    </div>
+                </div>
+
+                <!-- Temporitzador central gran -->
+                <div class="flex items-center gap-4 bg-slate-800 px-5 py-2.5 rounded-xl border border-slate-700 min-w-[160px] justify-center">
+                    <i data-lucide="timer" class="w-6 h-6 text-amber-400 animate-spin-slow"></i>
+                    <span class="text-2xl font-black font-mono tracking-wider text-amber-300" id="timer-display">02:00</span>
+                </div>
+
+                <!-- Botons d'acció ràpida -->
+                <div class="flex gap-2">
+                    <button onclick="confirmExit()" class="px-4 py-2 bg-slate-800 hover:bg-red-900/30 text-slate-300 hover:text-red-400 transition-colors rounded-xl text-xs font-bold border border-slate-700 flex items-center gap-1.5">
+                        <i data-lucide="log-out" class="w-4 h-4"></i>
+                        Sortir
+                    </button>
+                    <button onclick="finishTest()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white transition-colors rounded-xl text-xs font-bold shadow-md shadow-blue-500/10 flex items-center gap-1.5">
+                        <i data-lucide="check-square" class="w-4 h-4"></i>
+                        He acabat!
+                    </button>
+                </div>
+            </div>
+
+            <!-- Graella de 4 columnes de 15 operacions = 60 en total -->
+            <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-100 overflow-x-auto">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 min-w-[760px]">
+                    <!-- Columna 1 -->
+                    <div class="space-y-3">
+                        <div class="bg-slate-100 text-slate-600 font-black text-xs text-center py-1.5 rounded-lg uppercase tracking-wider">Columna A</div>
+                        <div id="col-0" class="space-y-2"></div>
+                    </div>
+                    <!-- Columna 2 -->
+                    <div class="space-y-3">
+                        <div class="bg-slate-100 text-slate-600 font-black text-xs text-center py-1.5 rounded-lg uppercase tracking-wider">Columna B</div>
+                        <div id="col-1" class="space-y-2"></div>
+                    </div>
+                    <!-- Columna 3 -->
+                    <div class="space-y-3">
+                        <div class="bg-slate-100 text-slate-600 font-black text-xs text-center py-1.5 rounded-lg uppercase tracking-wider">Columna C</div>
+                        <div id="col-2" class="space-y-2"></div>
+                    </div>
+                    <!-- Columna 4 -->
+                    <div class="space-y-3">
+                        <div class="bg-slate-100 text-slate-600 font-black text-xs text-center py-1.5 rounded-lg uppercase tracking-wider">Columna D</div>
+                        <div id="col-3" class="space-y-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teclat numèric en pantalla per a dispositius mòbils -->
+            <div class="block lg:hidden bg-white p-4 rounded-2xl shadow-md border border-slate-100 max-w-sm mx-auto w-full">
+                <div class="grid grid-cols-3 gap-2">
+                    <button type="button" onclick="pressKey(1)" class="py-4 bg-slate-100 active:bg-slate-200 text-xl font-bold rounded-xl">1</button>
+                    <button type="button" onclick="pressKey(2)" class="py-4 bg-slate-100 active:bg-slate-200 text-xl font-bold rounded-xl">2</button>
+                    <button type="button" onclick="pressKey(3)" class="py-4 bg-slate-100 active:bg-slate-200 text-xl font-bold rounded-xl">3</button>
+                    <button type="button" onclick="pressKey(4)" class="py-4 bg-slate-100 active:bg-slate-200 text-xl font-bold rounded-xl">4</button>
+                    <button type="button" onclick="pressKey(5)" class="py-4 bg-slate-100 active:bg-slate-200 text-xl font-bold rounded-xl">5</button>
+                    <button type="button" onclick="pressKey(6)" class="py-4 bg-slate-100 active:bg-slate-200 text-xl font-bold rounded-xl">6</button>
+                    <button type="button" onclick="pressKey(7)" class="py-4 bg-slate-100 active:bg-slate-200 text-xl font-bold rounded-xl">7</button>
+                    <button type="button" onclick="pressKey(8)" class="py-4 bg-slate-100 active:bg-slate-200 text-xl font-bold rounded-xl">8</button>
+                    <button type="button" onclick="pressKey(9)" class="py-4 bg-slate-100 active:bg-slate-200 text-xl font-bold rounded-xl">9</button>
+                    <button type="button" onclick="pressKey('clear')" class="py-4 bg-red-50 text-red-600 active:bg-red-100 text-sm font-bold rounded-xl uppercase">Borrar</button>
+                    <button type="button" onclick="pressKey(0)" class="py-4 bg-slate-100 active:bg-slate-200 text-xl font-bold rounded-xl">0</button>
+                    <button type="button" onclick="pressKey('next')" class="py-4 bg-blue-600 text-white active:bg-blue-700 text-sm font-bold rounded-xl uppercase flex items-center justify-center"><i data-lucide="arrow-down" class="w-5 h-5"></i></button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- PANTALLA DE RESULTATS I RETROALIMENTACIÓ -->
+        <section id="results-screen" class="hidden grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Columna de Resultat Principal -->
+            <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-100 flex flex-col justify-between items-center text-center">
+                <div class="w-full">
+                    <div class="text-sm font-black uppercase tracking-wider text-slate-500 mb-2">Sèrie Finalitzada</div>
+                    <h2 class="text-3xl font-black text-slate-800 mb-6" id="results-title">Resultats</h2>
+                    
+                    <!-- Cercle de puntuació -->
+                    <div class="w-32 h-32 bg-blue-50 border-4 border-blue-500 rounded-full flex flex-col items-center justify-center mx-auto mb-6 shadow-sm">
+                        <span class="text-5xl font-black text-blue-600" id="score-display">0</span>
+                        <span class="text-xs font-bold text-blue-400 uppercase tracking-widest">Correctes</span>
+                    </div>
+
+                    <div class="space-y-2 mb-6 text-sm text-slate-600">
+                        <p>Total contestades: <strong id="total-answered">0</strong> / 60</p>
+                        <p>Total errors: <strong class="text-red-500" id="total-errors">0</strong></p>
+                    </div>
+                </div>
+
+                <div class="w-full">
+                    <button onclick="restartTest()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/10 flex items-center justify-center gap-2 mb-2 transition-all">
+                        <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+                        Tornar a provar
+                    </button>
+                    <button onclick="goToConfig()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-2 transition-all">
+                        <i data-lucide="home" class="w-5 h-5"></i>
+                        Menú Principal
+                    </button>
+                </div>
+            </div>
+
+            <!-- Columna de Consell i Recomanació del Mètode -->
+            <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-100 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-2.5 bg-amber-50 text-amber-600 rounded-xl">
+                            <i data-lucide="sparkles" class="w-6 h-6"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-slate-800">Recomanació</h2>
+                    </div>
+
+                    <!-- Targeta de decisió dinàmica (Pujar, baixar o mantenir) -->
+                    <div id="recommendation-box" class="p-4 rounded-xl mb-6 flex gap-3 items-start">
+                        <!-- S'omple dinàmicament -->
+                    </div>
+
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                        El mètode de <strong>El Quinzet</strong> recomana fer aquesta mateixa sèrie 3 cops per setmana fins que aconsegueixis dominar-la abans de fer el canvi definitiu.
+                    </p>
+                </div>
+
+                <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                    <h4 class="font-bold text-xs text-blue-800 uppercase tracking-wider mb-1">Rècord anterior</h4>
+                    <p class="text-sm text-blue-900" id="last-record-display">Encara no tenies cap registre d'aquest nivell.</p>
+                </div>
+            </div>
+
+            <!-- Columna d'Historial d'Intents -->
+            <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-100 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-2.5 bg-violet-50 text-violet-600 rounded-xl">
+                            <i data-lucide="history" class="w-6 h-6"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-slate-800">Historial d'Intents</h2>
+                    </div>
+                    <p class="text-xs text-slate-500 mb-4">Aquests són els teus darrers intents d'aquesta sessió o dispositiu.</p>
+                    
+                    <div class="space-y-2 max-h-[220px] overflow-y-auto pr-1" id="history-list">
+                        <!-- Es genera dinàmicament -->
+                    </div>
+                </div>
+
+                <button onclick="clearCurrentHistory()" class="mt-4 text-xs font-bold text-red-500 hover:text-red-700 flex items-center justify-center gap-1 py-2">
+                    <i data-lucide="trash-2" class="w-4 h-4"></i>
+                    Esborrar dades guardades
+                </button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Modal d'ajuda o confirmació personalitzat -->
+    <div id="custom-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100">
+            <div class="flex items-center gap-3 mb-4 text-red-600" id="modal-header-container">
+                <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+                <h3 class="text-lg font-bold" id="modal-title">Atenció</h3>
+            </div>
+            <p class="text-slate-600 text-sm mb-6" id="modal-body">Estàs segur que vols abandonar la prova actual? Perdràs tot el progrés que portes acumulat en aquesta sessió.</p>
+            <div class="fle
